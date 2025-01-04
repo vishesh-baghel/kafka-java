@@ -37,7 +37,8 @@ public class Main {
             OutputStream outputStream = clientSocket.getOutputStream();
             outputStream.write(messageSize);
             outputStream.write(correlationId);
-            outputStream.write(new byte[] {0, 35});
+            outputStream.write(new byte[] {0, 0}); // error code
+            outputStream.write(requestApiKeyVersion);
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         } finally {
