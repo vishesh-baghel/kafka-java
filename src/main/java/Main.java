@@ -22,14 +22,22 @@ public class Main {
             clientSocket = serverSocket.accept();
             InputStream inputStream = clientSocket.getInputStream();
 
-            byte[] bytes = new byte[4];
-            inputStream.read(bytes);
-            inputStream.read(bytes);
-            inputStream.read(bytes);
+            byte[] messageSize = new byte[4];
+            inputStream.read(messageSize);
+
+            byte[] requestApiKey = new byte[2];
+            inputStream.read(requestApiKey);
+
+            byte[] requestApiKeyVersion = new byte[2];
+            inputStream.read(requestApiKeyVersion);
+
+            byte[] correlationId = new byte[4];
+            inputStream.read(correlationId);
 
             OutputStream outputStream = clientSocket.getOutputStream();
-            outputStream.write(new byte[] {0, 0, 0, 0});
-            outputStream.write(bytes);
+            outputStream.write(messageSize);
+            outputStream.write(correlationId);
+            outputStream.write(requestApiKeyVersion);
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         } finally {
