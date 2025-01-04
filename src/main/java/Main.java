@@ -1,7 +1,9 @@
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +20,10 @@ public class Main {
             serverSocket.setReuseAddress(true);
             // Wait for connection from client.
             clientSocket = serverSocket.accept();
+            InputStream inputStream = clientSocket.getInputStream();
+
+            byte[] bytes = inputStream.readAllBytes();
+            System.out.println(Arrays.toString(bytes));
             OutputStream outputStream = clientSocket.getOutputStream();
             outputStream.write(new byte[] {0, 1, 2, 3});
             outputStream.write(new byte[] {0, 0, 0, 7});
