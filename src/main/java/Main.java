@@ -37,7 +37,7 @@ public class Main {
             OutputStream outputStream = clientSocket.getOutputStream();
             outputStream.write(messageSize);
             outputStream.write(correlationId);
-            outputStream.write(35);
+            outputStream.write(new byte[] {(byte) 35});
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         } finally {
