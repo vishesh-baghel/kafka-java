@@ -22,8 +22,10 @@ public class Main {
             clientSocket = serverSocket.accept();
             InputStream inputStream = clientSocket.getInputStream();
 
-            byte[] correlationId = new byte[32];
-            inputStream.read(correlationId, 4, 8);
+            byte[] correlationId = new byte[4];
+            inputStream.read(correlationId);
+            inputStream.read(correlationId);
+            inputStream.read(correlationId);
 
             OutputStream outputStream = clientSocket.getOutputStream();
             outputStream.write(correlationId);
