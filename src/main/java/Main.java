@@ -22,11 +22,11 @@ public class Main {
             clientSocket = serverSocket.accept();
             InputStream inputStream = clientSocket.getInputStream();
 
-            byte[] bytes = inputStream.readAllBytes();
-            System.out.println(Arrays.toString(bytes));
+            byte[] correlationId = new byte[24];
+            inputStream.read(correlationId, 16, 24);
+
             OutputStream outputStream = clientSocket.getOutputStream();
-            outputStream.write(new byte[] {0, 1, 2, 3});
-            outputStream.write(new byte[] {0, 0, 0, 7});
+            outputStream.write(correlationId);
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         } finally {
