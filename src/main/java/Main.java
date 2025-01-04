@@ -22,13 +22,14 @@ public class Main {
             clientSocket = serverSocket.accept();
             InputStream inputStream = clientSocket.getInputStream();
 
-            byte[] correlationId = new byte[4];
-            inputStream.read(correlationId);
-            inputStream.read(correlationId);
-            inputStream.read(correlationId);
+            byte[] bytes = new byte[4];
+            inputStream.read(bytes);
+            inputStream.read(bytes);
+            inputStream.read(bytes);
 
             OutputStream outputStream = clientSocket.getOutputStream();
-            outputStream.write(correlationId);
+            outputStream.write(new byte[] {0, 0, 0, 0});
+            outputStream.write(bytes);
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         } finally {
