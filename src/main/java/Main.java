@@ -39,11 +39,12 @@ public class Main {
             outputStream.write(correlationId);
             outputStream.write(new byte[] {0, 0}); // error code
             outputStream.write(requestApiKeyVersion);
+            outputStream.close();
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         } finally {
             try {
-                if (clientSocket != null) {
+                if (clientSocket != null ) {
                     clientSocket.close();
                 }
             } catch (IOException e) {
