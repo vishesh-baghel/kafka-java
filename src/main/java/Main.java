@@ -23,7 +23,7 @@ public class Main {
             InputStream inputStream = clientSocket.getInputStream();
 
             byte[] correlationId = new byte[32];
-            inputStream.read(correlationId, 8, 10);
+            inputStream.read(correlationId, 4, 8);
 
             OutputStream outputStream = clientSocket.getOutputStream();
             outputStream.write(correlationId);
